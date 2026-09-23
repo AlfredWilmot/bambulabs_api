@@ -48,10 +48,10 @@ func (hmsRecords *HmsECodeRecords) Gather() error {
 
 	for page < MAX_PAGES {
 		resp, err := http.Get(fmt.Sprintf("%s?size=%d&page=%d", JSON_URL, MAX_RECORDS, page))
-		defer resp.Body.Close()
 		if err != nil {
 			return err
 		}
+		defer resp.Body.Close()
 		if err := json.NewDecoder(resp.Body).Decode(&hmsResp); err != nil {
 			return err
 		}
