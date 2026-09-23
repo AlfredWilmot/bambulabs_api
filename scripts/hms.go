@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 	"text/template"
 )
 
@@ -102,6 +103,11 @@ func main() {
 	if err := records.Gather(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
+	}
+
+	// sanitise Intro strings
+	for i := 0; i < len(records); i++ {
+		records[i].Intro = strings.ReplaceAll(records[i].Intro, "\"", "\\\"")
 	}
 
 	// populate template and dump to stdout
