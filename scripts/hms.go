@@ -103,7 +103,6 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
-	fmt.Println(records)
 
 	// populate template and dump to stdout
 	if err := records.Dump(hmsGoTemplate, os.Stdout); err != nil {
